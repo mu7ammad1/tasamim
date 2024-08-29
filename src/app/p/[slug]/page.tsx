@@ -94,7 +94,6 @@ export default async function Page({ params, searchParams }: Props) {
           {profiles?.bio && <p>{profiles?.bio}</p>}
           <Follow_BTN />
         </div>
-
         <main className="flex flex-col items-center w-full mt-3">
           <section className="flex flex-wrap w-full max-w-7xl *:p-2">
             {profiles.studios?.map((studio: any, index: number) => (
