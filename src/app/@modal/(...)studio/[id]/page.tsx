@@ -1,4 +1,3 @@
-/** @type {import("next").Metadata} */
 import { Chat_bubble_oval_left_Outline, Heart_Outline } from "@/components/Icons";
 import Love_BTN from "@/components/Screens/Love_BTN";
 import { Button } from "@/components/ui/button";
@@ -8,7 +7,7 @@ import { createClient } from "@/lib/utils/supabase/server";
 import Image from "next/image";
 import Link from "next/link";
 
-import type { Metadata, ResolvingMetadata } from 'next'
+import type { Metadata } from 'next'
 
 type Props = {
   params: { id: any }
@@ -17,62 +16,63 @@ type Props = {
 
 
 
-export async function generateMetadata(
-  { params }: Props,
-): Promise<Metadata> {
-  const id = params.id;
+// export async function generateMetadata(
+//   { params }: Props,
+// ): Promise<Metadata> {
+//   const id = params.id;
 
-  try {
-    const supabase = createClient();
+//   try {
+//     const supabase = createClient();
 
-    const { data: studio, error } = await supabase
-      .from("studios")
-      .select("title,description,website,tags,image,gallery,avatar")
-      .eq("id", id)
-      .single();
+//     const { data: studio, error } = await supabase
+//       .from("studios")
+//       .select("title,description,website,tags,image,gallery,avatar")
+//       .eq("id", id)
+//       .single();
 
-    if (error || !studio) {
-      console.error("Studio fetch error:", error);
-      return { title: "Studio not found" };
-    }
+//     if (error || !studio) {
+//       console.error("Studio fetch error:", error);
+//       return { title: "Studio not found" };
+//     }
 
 
-    return {
-      title: studio?.title || "Studio Details",
-      description: studio?.description,
-      keywords: [studio.tags],
-      generator: 'منصة تصاميم',
-      applicationName: 'منصة تصاميم',
-      referrer: 'origin-when-cross-origin',
-      metadataBase: new URL('https://tasamim.co'),
-      themeColor: `#ffffff`,
-      twitter: {
-        card: 'summary_large_image',
-        title: studio?.title,
-        description: studio?.description,
-        site: '@tasamimco',
-        creator: '@tasamimco',
-        images: [`https://slcxhoelsccxiuwegpom.supabase.co/storage/v1/object/public/image/studio/${studio?.avatar || `0`}`],  // صورة واحدة فقط
-      },
-      openGraph: {
-        title: studio?.title || 'منصة تصاميم',
-        description: studio?.description || "تصاميم اول منصة لعرض التصميمات و الاعمال",
-        url: 'https://nextjs.org',
-        siteName: 'منصة تصاميم',
-        images: studio.gallery.map((image: any) => ({
-          url: `https://slcxhoelsccxiuwegpom.supabase.co/storage/v1/object/public/image/studio/${image.image}`,
-          width: 800,
-          height: 600,
-        })),
-        locale: 'ar_EG',
-        type: 'website',
-      },
-    };
-  } catch (err) {
-    console.error("Metadata generation error:", err);
-    return { title: "Error generating metadata" };
-  }
-}
+//     return {
+//       title: studio?.title || "Studio Details",
+//       description: studio?.description,
+//       keywords: [studio.tags],
+//       generator: 'منصة تصاميم',
+//       applicationName: 'منصة تصاميم',
+//       referrer: 'origin-when-cross-origin',
+//       metadataBase: new URL('https://tasamim.co'),
+//       themeColor: `#ffffff`,
+//       twitter: {
+//         card: 'summary_large_image',
+//         title: studio?.title,
+//         description: studio?.description,
+//         site: '@tasamimco',
+//         creator: '@tasamimco',
+//         images: [`https://slcxhoelsccxiuwegpom.supabase.co/storage/v1/object/public/image/studio/${studio?.avatar || `0`}`],  // صورة واحدة فقط
+//       },
+//       openGraph: {
+//         title: studio?.title || 'منصة تصاميم',
+//         description: studio?.description || "تصاميم اول منصة لعرض التصميمات و الاعمال",
+//         url: 'https://nextjs.org',
+//         siteName: 'منصة تصاميم',
+//         images: studio.gallery.map((image: any) => ({
+//           url: `https://slcxhoelsccxiuwegpom.supabase.co/storage/v1/object/public/image/studio/${image.image}`,
+//           width: 800,
+//           height: 600,
+//         })),
+//         locale: 'ar_EG',
+//         type: 'website',
+//       },
+//     };
+//   } catch (err) {
+//     console.error("Metadata generation error:", err);
+//     return { title: "Error generating metadata" };
+//   }
+// }
+
 
 
 export default async function ScreenModal({
