@@ -2,9 +2,9 @@ import Cacontainer from "@/components/cacontainer";
 import { createClient } from "@/lib/utils/supabase/server";
 
 // Create a single supabase client for interacting with your database
-const supabase = createClient();
 
 export default async function Home() {
+  const supabase = createClient();
   // Fetch studios data from Supabase
   let { data: studios, error } = await supabase.from("studios").select("*").limit(19);
 

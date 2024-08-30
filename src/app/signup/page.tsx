@@ -14,12 +14,12 @@ export default function SignUp_Page({
   const signUp = async (formData: FormData) => {
     "use server";
 
+    const supabase = createClient();
     const origin = headers().get("origin");
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
     const username = formData.get("username") as string;
     const full_name = formData.get("full_name") as string;
-    const supabase = createClient();
 
     const { data: authData, error: signUpError } = await supabase.auth.signUp({
       email,

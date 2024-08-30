@@ -6,7 +6,6 @@ import { createClient } from "@/lib/utils/supabase/client";
 import { Loader, LucidePersonStanding } from "lucide-react";
 import DialogAuth from "../ui/DialogAuth";
 
-const supabase = createClient();
 
 type Props = {
     studioId: string;
@@ -14,6 +13,7 @@ type Props = {
 };
 
 export default function Love_BTN({ studioId, userId }: Props) {
+    const supabase = createClient();
     const [liked, setLiked] = useState<boolean | null>(null); // Start with null to indicate loading state
 
     // Fetch like status when component mounts or studioId changes
@@ -35,7 +35,7 @@ export default function Love_BTN({ studioId, userId }: Props) {
         };
 
         fetchLikeStatus();
-    }, [studioId, userId]);
+    }, [studioId, supabase, userId]);
 
     const handleLike = async () => {
         if (liked === null) return; // Prevent action if still loading

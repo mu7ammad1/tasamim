@@ -6,9 +6,9 @@ import { createClient } from "@/lib/utils/supabase/client";
 import { Loader, LucidePersonStanding } from "lucide-react";
 import DialogAuth from "../ui/DialogAuth";
 
-const supabase = createClient();
 
 export default function Follow_BTN() {
+    const supabase = createClient();
     const ScreenID = `f13f7d4f-d29d-4c49-b875-f1c0f8862272`;
     const userId = `4285c5b3-0a40-4576-a29f-8129dd09988f`;
 
@@ -37,7 +37,7 @@ export default function Follow_BTN() {
         };
 
         fetchLikeStatus();
-    }, [ScreenID, userId]);
+    }, [ScreenID, supabase, userId]);
 
     const handleLike = async () => {
         if (follow === null) return;
