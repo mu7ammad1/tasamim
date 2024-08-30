@@ -40,11 +40,6 @@ export async function generateMetadata(
       title: studio?.title || "Studio Details",
       description: studio?.description,
       keywords: [studio.tags],
-      generator: 'منصة تصاميم',
-      applicationName: 'منصة تصاميم',
-      referrer: 'origin-when-cross-origin',
-      metadataBase: new URL('https://tasamim.co'),
-      themeColor: `#ffffff`,
       twitter: {
         card: 'summary_large_image',
         title: studio?.title,

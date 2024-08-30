@@ -31,7 +31,6 @@ export const metadata: Metadata = {
   applicationName: 'منصة تصاميم',
   referrer: 'origin-when-cross-origin',
   metadataBase: new URL('https://tasamim.co'),
-  themeColor: `#ffffff`,
 };
 
 export default function RootLayout({
