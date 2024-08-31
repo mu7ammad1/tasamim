@@ -18,18 +18,18 @@ type Block = {
   content: string;
 };
 
-export default function Editor({ userId }: { userId: string }) {
+export default function Editor({ userId }: { userId: any }) {
   const [blocks, setBlocks] = useState<Block[]>([
     { id: 1, type: "image", content: defalut.src },
   ]);
   const [title, setTitle] = useState(``)
-  const [image, setImage] = useState(``)
   const [avatar, setAvatar] = useState(``)
   const [description, setDescription] = useState(``)
   const [website, setWebsite] = useState(``)
   const [tags, setTags] = useState(``)
 
   const supabase = createClient();
+  const Router = useRouter()
 
   const handleAddBlock = (index: number, type: "image" | "text") => {
     const newBlock: Block = {
@@ -96,17 +96,6 @@ export default function Editor({ userId }: { userId: string }) {
     }
   };
 
-  const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const base64String = reader.result as string;
-        setImage(base64String);
-      };
-      reader.readAsDataURL(file); // This will trigger the conversion to Base64
-    }
-  };
   const handleAvatar = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -123,35 +112,6 @@ export default function Editor({ userId }: { userId: string }) {
     let imageUrl = null;
     let avatarUrl = null;
 
-    if (image) {
-      try {
-        const blob: any = await fetch(image).then((res) => res.blob());
-        const webpBlob = await convertToWebPBlob(blob);
-        const fileName = `studio/${Date.now()}`;
-
-        const { error: uploadError } = await supabase.storage
-          .from("image")
-          .upload(fileName, webpBlob, {
-            cacheControl: "3600",
-            upsert: false,
-          });
-
-        if (uploadError) {
-          console.error("Upload error:", uploadError);
-        } else {
-          const { data: publicUrlData, error: urlError }: any =
-            supabase.storage.from("image").getPublicUrl(fileName);
-
-          if (urlError) {
-            console.error("URL fetch error:", urlError);
-          } else {
-            imageUrl = publicUrlData?.publicUrl || null;
-          }
-        }
-      } catch (error) {
-        console.error("Error processing image:", error);
-      }
-    }
     if (avatar) {
       try {
         const blob: any = await fetch(avatar).then((res) => res.blob());
@@ -181,6 +141,7 @@ export default function Editor({ userId }: { userId: string }) {
         console.error("Error processing image:", error);
       }
     }
+
     const uploadedImages = await Promise.all(
       blocks
         .filter((block) => block.type === "image" && block.content)
@@ -240,6 +201,7 @@ export default function Editor({ userId }: { userId: string }) {
       console.error("Insert error:", error);
     } else {
       console.log("Data inserted successfully:", data);
+      Router.push(`/`)
     }
   };
 
@@ -267,11 +229,6 @@ export default function Editor({ userId }: { userId: string }) {
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                 />
-                <p>Image</p>
-                <Input type="file" onChange={handleImage} placeholder="Upload & Update image" />
-                {image && (
-                  <Image src={image} alt="Preview" width={1024} height={1024} className="h-52 object-cover" />
-                )}
                 <Button
                   variant={"default"}
                   size={"default"}

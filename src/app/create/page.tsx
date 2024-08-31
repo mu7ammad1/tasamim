@@ -9,7 +9,7 @@ export default async function Create_Page() {
 
   return (
     <main className='w-full'>
-      <Editor userId={`${user?.id}`} />
+      <Editor userId={user?.id} />
     </main>
   )
 }

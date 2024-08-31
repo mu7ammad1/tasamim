@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Card({ studio, latestStudio }: any) {
+export default function Card({ studio }: any) {
   return (
-    <div className="w-full flex justify-center">
+    <div className="w-full flex justify-center mb-10">
       <div className="p-5 rounded-lg w-full max-w-5xl mx-4 relative h-full overflow-auto">
         <Image
           alt={`gallery`}

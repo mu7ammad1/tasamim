@@ -8,7 +8,7 @@ interface StudioProps {
         title: string;
         website: string;
         description: string;
-        image: string;
+        avatar: string;
     };
 }
 
@@ -28,7 +28,7 @@ export default function Cacontainer({ studio }: StudioProps) {
                 <Link
                     href={`/studio/${studio.id}`}
                     style={{
-                        backgroundImage: `url('${studio.image}')`,
+                        backgroundImage: `url('${studio.avatar}')`,
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                     }}
