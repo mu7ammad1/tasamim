@@ -7,7 +7,7 @@ export default function Card({ studio, latestStudio }: any) {
       <div className="p-5 rounded-lg w-full max-w-5xl mx-4 relative h-full overflow-auto">
         <Image
           alt={`gallery`}
-          src={`https://slcxhoelsccxiuwegpom.supabase.co/storage/v1/object/public/image/studio/${studio.avatar}`}
+          src={`${studio.avatar}`}
           width={1024}
           height={1024}
           className="w-full max-h-[200px] min-h-[500px] mb-3 rounded-xl object-cover object-center"
@@ -15,7 +15,7 @@ export default function Card({ studio, latestStudio }: any) {
         <h1 className="text-2xl font-bold mt-4" dir="rtl">
           {studio.title}
         </h1>
-        <p className="text-lg mt-2" dir="auto">
+        <p className="text-lg mt-2" dir="rtl">
           {studio.description}
         </p>
         <div
@@ -30,7 +30,7 @@ export default function Card({ studio, latestStudio }: any) {
         {studio.gallery.map((gallery: any, index: any) => (
           <Image
             alt={gallery}
-            src={`https://slcxhoelsccxiuwegpom.supabase.co/storage/v1/object/public/image/studio/${gallery}`}
+            src={`${gallery}`}
             key={index}
             width={1024}
             height={1024}

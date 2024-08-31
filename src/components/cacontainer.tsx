@@ -28,7 +28,7 @@ export default function Cacontainer({ studio }: StudioProps) {
                 <Link
                     href={`/studio/${studio.id}`}
                     style={{
-                        backgroundImage: `url('https://slcxhoelsccxiuwegpom.supabase.co/storage/v1/object/public/image/studio/${studio.image}')`,
+                        backgroundImage: `url('${studio.image}')`,
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                     }}
